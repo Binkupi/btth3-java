@@ -112,13 +112,21 @@ public class Login extends javax.swing.JFrame {
                 count++;
             }
         }else{
-            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-        JOptionPane.showMessageDialog(frame,
-                "Mật khẩu hoặc tài khoản không đúng",
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+            if(user.equals("Adminuser")&&password.equals("admin")){
                 this.dispose();
+                new Register().setVisible(true);
+                
+            }
+            else{
+                JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                JOptionPane.showMessageDialog(frame,
+                        "Mật khẩu hoặc tài khoản không đúng",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                        this.dispose();
+            }
         }
+            
     }//GEN-LAST:event_btnOkActionPerformed
 
     /**

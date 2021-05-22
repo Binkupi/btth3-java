@@ -87,14 +87,21 @@ public class Register extends javax.swing.JFrame {
         });
 
         btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        rdFemale.setBackground(new java.awt.Color(204, 204, 204));
         buttonGroup1.add(rdFemale);
         rdFemale.setText("Female");
         rdFemale.setAutoscrolls(true);
 
+        rdMale.setBackground(new java.awt.Color(204, 204, 204));
         buttonGroup1.add(rdMale);
         rdMale.setText("Male");
 
@@ -124,10 +131,10 @@ public class Register extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        buttonGroup2.add(ckbLibray);
+        ckbLibray.setBackground(new java.awt.Color(204, 204, 204));
         ckbLibray.setText("Library");
 
-        buttonGroup2.add(ckbComputer);
+        ckbComputer.setBackground(new java.awt.Color(204, 204, 204));
         ckbComputer.setText("Compoter Drome");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -192,7 +199,7 @@ public class Register extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,8 +239,8 @@ public class Register extends javax.swing.JFrame {
                         .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(51, 51, 51)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(41, 41, 41)
                 .addComponent(jLabel8)
                 .addGap(5, 5, 5)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,7 +248,7 @@ public class Register extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(btnClose))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,24 +259,35 @@ public class Register extends javax.swing.JFrame {
         String age=txtAge.getText();
         String address=txtAddress.getText();
         StringBuilder sb = new StringBuilder();
-        if(name.equals("")){
+        if(name.equals("")||age.equals("")||address.equals("")){
+            if(name.equals("")){
             sb.append("name invalid \n");
+            }
+            if(age.equals("")){
+                sb.append("age invalid \n");
+            }
+              if(address.equals("")){
+                sb.append("address invalid \n");
+            }
+            if(sb.length()>0){
+                 JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                    JOptionPane.showMessageDialog(frame,
+                  sb.toString(),
+                  "Error",
+                  JOptionPane.ERROR_MESSAGE);
+
+            }
+        }else{
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                    JOptionPane.showMessageDialog(frame,
+                    "Nhập thông tin sinh viên thành công");
         }
-        if(age.equals("")){
-            sb.append("age invalid \n");
-        }
-          if(address.equals("")){
-            sb.append("address invalid \n");
-        }
-        if(sb.length()>0){
-             JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-          JOptionPane.showMessageDialog(frame,
-              sb.toString(),
-              "Error",
-              JOptionPane.ERROR_MESSAGE);
-              this.dispose();
-        }
+        
     }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments

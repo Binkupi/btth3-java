@@ -23,6 +23,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -137,21 +141,20 @@ public class QuanLySinhVien extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAdd)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtMSSV, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)))
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtName)
+                    .addComponent(txtBirthday)
+                    .addComponent(txtMSSV, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -210,7 +213,7 @@ public class QuanLySinhVien extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -237,8 +240,18 @@ public class QuanLySinhVien extends javax.swing.JFrame {
         });
 
         btnCancelFile.setText("Hủy");
+        btnCancelFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelFileActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Thoát");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -248,17 +261,17 @@ public class QuanLySinhVien extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnOpenFile, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSaveFile, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelFile, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(148, 148, 148)
+                        .addComponent(btnSaveFile, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnCancelFile, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,9 +283,9 @@ public class QuanLySinhVien extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOpenFile)
-                    .addComponent(btnSaveFile)
                     .addComponent(btnCancelFile)
-                    .addComponent(btnCancel))
+                    .addComponent(btnCancel)
+                    .addComponent(btnSaveFile))
                 .addContainerGap())
         );
 
@@ -316,13 +329,33 @@ public class QuanLySinhVien extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-
+        int selectedRow=tbStudent.getSelectedRow();
+        if(selectedRow>=0){
             DefaultTableModel model = (DefaultTableModel) tbStudent.getModel();
-            int selectedRow=tbStudent.getSelectedRow();
-            model.removeRow(selectedRow);
-            if(selectedRow==0){
-                btnSaveFile.setEnabled(false);
-            }
+            String name=tbStudent.getValueAt(selectedRow,1).toString();
+            int response = JOptionPane.showConfirmDialog (null,
+                            "Bạn có muốn xóa sinh viên "+name+" không?"
+                               ,"Confirm Overwrite",
+                            JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.OK_OPTION){
+                model.removeRow(selectedRow);
+                txtBirthday.setText("");
+                txtMSSV.setText("");
+                txtName.setText("");
+                if(tbStudent.getRowCount()==0){
+                    btnSaveFile.setEnabled(false);
+                    btnUpdate.setEnabled(false);
+                    btnDelete.setEnabled(false);
+                }
+            }          
+        }else{
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                          JOptionPane.showMessageDialog(frame,
+                              "Bạn vui lòng chọn sinh viên trong danh sách!",
+                              "Thông báo",
+                              JOptionPane.WARNING_MESSAGE);
+        }
+                   
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnOpenFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenFileActionPerformed
@@ -331,70 +364,106 @@ public class QuanLySinhVien extends javax.swing.JFrame {
         if (select == JFileChooser.APPROVE_OPTION) {
             DefaultTableModel row = (DefaultTableModel) tbStudent.getModel();
             int numberRow=tbStudent.getRowCount();
+            row.setRowCount(0);
+            tbStudent.clearSelection();
+            String filename = fc.getSelectedFile().getName();
+            String dir = fc.getCurrentDirectory().toString();
+            String filePath = dir+"\\"+filename;
 
-            for(int i=0;i<numberRow;i++){
-                row.removeRow(i);
+                try {
+                    // Đọc dữ liệu từ File với File và FileReader
+                    //       File file = new File(filePath);
+                    FileReader file = new FileReader(filePath);
+                try {
+                    readFile(file,filename);
+                } catch (IOException ex) {
+                    Logger.getLogger(QuanLySinhVien.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                }
+                } catch (FileNotFoundException ex) {
+                    
+                    Logger.getLogger(QuanLySinhVien.class.getName()).log(Level.SEVERE, null, ex); 
+                }   
+
+                btnSaveFile.setEnabled(true);
             }
-        String filename = fc.getSelectedFile().getName();
-        String dir = fc.getCurrentDirectory().toString();
-        String filePath = dir+"\\"+filename;
-        
-            try {
-                // Đọc dữ liệu từ File với File và FileReader
-                //       File file = new File(filePath);
-                FileReader file = new FileReader(filePath);
-            try {
-                readFile(file);
-            } catch (IOException ex) {
-                Logger.getLogger(QuanLySinhVien.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(QuanLySinhVien.class.getName()).log(Level.SEVERE, null, ex); 
-            }   
-            
-            btnSaveFile.setEnabled(true);
-        }
     }//GEN-LAST:event_btnOpenFileActionPerformed
 
-    private void readFile(FileReader file) throws FileNotFoundException, IOException{
+    private void readFile(FileReader file,String filename) throws FileNotFoundException, IOException{
         
         BufferedReader br = new BufferedReader(file);
         String mssv="", name="", birthday="";
-            int i=0;
-            String line = br.readLine();
-        
+        int i=0;
+        String line = br.readLine();
+        int status=0;
         while(line!=null){
                if(i==0){
                     mssv=line.toString();  
                     i++;
+                    status=1;
+                    
                 }else if(i==1){
                      name=line.toString();
                      i++;
-                }else if(i==2){
+                     status=2;
+                }else{
                     birthday=line.toString();
                     Object[] row = { mssv, name, birthday };
                     DefaultTableModel model = (DefaultTableModel) tbStudent.getModel();
                     model.addRow(row);
                     i=0;
+                    status=0;
                 }
                line = br.readLine();              
         }
+        if(status==1){
+            Object[] row = { mssv,"","" };
+            DefaultTableModel model = (DefaultTableModel) tbStudent.getModel();
+            model.addRow(row);
+        }else if(status==2){
+            Object[] row = { mssv,name,"" };
+            DefaultTableModel model = (DefaultTableModel) tbStudent.getModel();
+            model.addRow(row);
+        }
+        JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+        JOptionPane.showMessageDialog(frame,
+        "Mở file "+filename+"Thành công!!!");
+        
         br.close();
+        file.close();
+
     }
     
     private void txtMSSVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMSSVKeyReleased
 
     }//GEN-LAST:event_txtMSSVKeyReleased
+    //Hàm kiểm tra định dạng ngày sinh
+    private boolean isValidDate(String date){
+        boolean result=true;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        dateFormat.setLenient(false);
+        try{
+            Date d = dateFormat.parse(date);
+            // string contains valid date
+            }
+        catch (ParseException ex)            {
+            // string contains invalid date
+            result=false;
+            }
+        return result;
+    }
 
+//Button lưu thông tin sinh viên
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         String mssv= txtMSSV.getText();
         String name=txtName.getText();
         String birthday=txtBirthday.getText();
         
-       StringBuilder sb = new StringBuilder();
-       if(name.equals("")||mssv.equals("")||birthday.equals("")){
-           sb.append("mã số sinh viên,tên,ngày sinh không được để trống \n");
-       }       
+        StringBuilder sb = new StringBuilder();
+        
+        if(name.equals("")||mssv.equals("")||birthday.equals("")){
+            sb.append("mã số sinh viên,tên,ngày sinh không được để trống \n");
+        } 
         if(sb.length()>0){
              JFrame frame = new JFrame("JOptionPane showMessageDialog example");
           JOptionPane.showMessageDialog(frame,
@@ -418,24 +487,37 @@ public class QuanLySinhVien extends javax.swing.JFrame {
                        JOptionPane.showMessageDialog(frame,
                            sb.toString(),
                            "Thông báo",
-                           JOptionPane.ERROR_MESSAGE);
+                           JOptionPane.WARNING_MESSAGE);
                        result=false;
                        break;
                    }
                 }
             }
+            //Kiểm tra ngày sinh có đúng địng dạng không
+            if(isValidDate(birthday)==false){
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("Ngày sinh không đúng định dạng \n");  
+                if(stringBuilder.length()>0){
+                     JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                  JOptionPane.showMessageDialog(frame,
+                      stringBuilder.toString(),
+                      "Thông báo",
+                      JOptionPane.ERROR_MESSAGE);
+                  result=false;
+                }
+            }
             if(result){
-            model.addRow(row);
-            btnAdd.setText("Thêm");
-            btnSave.setEnabled(false);
-            txtBirthday.setText("");
-            txtMSSV.setText("");
-            txtName.setText("");
-            txtMSSV.setEnabled(false);
-            txtName.setEnabled(false);
-            txtBirthday.setEnabled(false);
-            btnSaveFile.setEnabled(true);
-        }                   
+                model.addRow(row);
+                btnAdd.setText("Thêm");
+                btnSave.setEnabled(false);
+                txtBirthday.setText("");
+                txtMSSV.setText("");
+                txtName.setText("");
+                txtMSSV.setEnabled(false);
+                txtName.setEnabled(false);
+                txtBirthday.setEnabled(false);
+                btnSaveFile.setEnabled(true);
+            }                   
             
         }
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -459,45 +541,83 @@ public class QuanLySinhVien extends javax.swing.JFrame {
         String mssv= txtMSSV.getText();
         String name=txtName.getText();
         String birthday=txtBirthday.getText();
-        int numberRow=tbStudent.getRowCount();
+        StringBuilder sb = new StringBuilder();
         int selectedRow=tbStudent.getSelectedRow();
-        String saveMSSV;
-        boolean result=true;
-        for(int i=0;i<numberRow;i++){
-            saveMSSV=tbStudent.getValueAt(i,0).toString();
-            if(i==selectedRow){
-                continue;
+        System.out.print(selectedRow);
+        if(selectedRow>=0){
+            if(name.equals("")||mssv.equals("")||birthday.equals("")){
+                sb.append("mã số sinh viên,tên,ngày sinh không được để trống \n");
+            } 
+            if(sb.length()>0){
+                 JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+              JOptionPane.showMessageDialog(frame,
+                  sb.toString(),
+                  "Thông báo",
+                  JOptionPane.ERROR_MESSAGE);
             }else{
-                if(mssv.equals(saveMSSV)){
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("mã số sinh viên "+mssv+"+này đã tồn tại. Bạn vui lòng nhập lại MSSV khác nhé \n");  
-                    if(sb.length()>0){
-                         JFrame frame = new JFrame("JOptionPane showMessageDialog example");
-                      JOptionPane.showMessageDialog(frame,
-                          sb.toString(),
-                          "Thông báo",
-                          JOptionPane.ERROR_MESSAGE);
-                      result=false;
-                      break;
-                    }
+                int numberRow=tbStudent.getRowCount();
+
+                String saveMSSV;
+                boolean result=true;
+                for(int i=0;i<numberRow;i++){
+                    saveMSSV=tbStudent.getValueAt(i,0).toString();
+                    if(i==selectedRow){
+                        continue;
+                    }else{
+                        if(mssv.equals(saveMSSV)){
+                            sb.append("mã số sinh viên "+mssv+"+này đã tồn tại. Bạn vui lòng nhập lại MSSV khác nhé \n");  
+                            if(sb.length()>0){
+                                 JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                              JOptionPane.showMessageDialog(frame,
+                                  sb.toString(),
+                                  "Thông báo",
+                                  JOptionPane.ERROR_MESSAGE);
+                              result=false;
+                              break;
+                            }
+                        }
+                    }  
                 }
-            }  
+                if(isValidDate(birthday)==false){
+                        StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append("Ngày sinh không đúng định dạng \n");  
+                        if(stringBuilder.length()>0){
+                             JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                          JOptionPane.showMessageDialog(frame,
+                              stringBuilder.toString(),
+                              "Thông báo",
+                              JOptionPane.ERROR_MESSAGE);
+                          result=false;
+                        }
+                    }
+                if(result){
+                    Object[] row = { mssv, name, birthday };
+                    DefaultTableModel model = (DefaultTableModel) tbStudent.getModel();
+                    model.setValueAt(mssv,selectedRow,0);
+                    model.setValueAt(name,selectedRow,1);
+                    model.setValueAt(birthday,selectedRow,2);
+                    btnAdd.setText("Thêm");
+                    btnSave.setEnabled(false);
+                    txtBirthday.setText("");
+                    txtMSSV.setText("");
+                    txtName.setText("");
+                    txtMSSV.setEnabled(false);
+                    txtName.setEnabled(false);
+                    txtBirthday.setEnabled(false);
+                    tbStudent.clearSelection();
+                }   
+            }
+        }else{
+            StringBuilder stringBuilder = new StringBuilder();
+                        stringBuilder.append("Bạn vui lòng chọn sinh viên trong danh sách \n");  
+                        if(stringBuilder.length()>0){
+                             JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+                          JOptionPane.showMessageDialog(frame,
+                              stringBuilder.toString(),
+                              "Thông báo",
+                              JOptionPane.WARNING_MESSAGE);
+                        }
         }
-        if(result){
-            Object[] row = { mssv, name, birthday };
-            DefaultTableModel model = (DefaultTableModel) tbStudent.getModel();
-            model.setValueAt(mssv,selectedRow,0);
-            model.setValueAt(name,selectedRow,1);
-            model.setValueAt(birthday,selectedRow,2);
-            btnAdd.setText("Thêm");
-            btnSave.setEnabled(false);
-            txtBirthday.setText("");
-            txtMSSV.setText("");
-            txtName.setText("");
-            txtMSSV.setEnabled(false);
-            txtName.setEnabled(false);
-            txtBirthday.setEnabled(false);
-        }     
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSaveFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveFileActionPerformed
@@ -520,50 +640,66 @@ public class QuanLySinhVien extends javax.swing.JFrame {
       
        
     }//GEN-LAST:event_btnSaveFileActionPerformed
+
+    private void btnCancelFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelFileActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelFileActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
     
     private void writerFile (FileWriter file,boolean isCheckedFile,String filename) throws FileNotFoundException, IOException{
        BufferedWriter bw = new BufferedWriter(file);
+       StringBuilder sb = new StringBuilder();
         if(isCheckedFile){
             int response = JOptionPane.showConfirmDialog (null,
                         "File "+filename+" tồn tại. Bạn có muốn ghi đè lên không?"
                            ,"Confirm Overwrite",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-                        if (response == JOptionPane.OK_OPTION){
-                            int numberRow=tbStudent.getRowCount();
-                            int count;
-                            String replaceString="";
-                            for(int i=0;i<numberRow;i++){
-                                count=0;
-                                while(count<=2)
-                                {
-                                    replaceString=tbStudent.getValueAt(i,count).toString();
-                                    bw.write(replaceString);
-                                    bw.write("\n");
-                                    count++;
-                                }                    
-                            }
-                            bw.close(); 
-                        }             
-                    }else{
-                        int numberRow=tbStudent.getRowCount();
-                        int count;
-                        String replaceString="";
-                        for(int i=0;i<numberRow;i++){
-                            count=0;
-                            while(count<=2)
-                            {
-                                replaceString=tbStudent.getValueAt(i,count).toString();
-                                bw.write(replaceString);
-                                bw.write("\n");
-                                count++;
-                            }
-                        }
-                        bw.close();    
-                    }
-        
-            //String line = br.readLine();
-
-         
+            if (response == JOptionPane.OK_OPTION){
+                int numberRow=tbStudent.getRowCount();
+                int count;
+                String replaceString="";
+                for(int i=0;i<numberRow;i++){
+                    count=0;
+                    while(count<=2)
+                    {
+                        replaceString=tbStudent.getValueAt(i,count).toString();
+                        bw.write(replaceString);
+                        bw.write("\n");
+                        count++;
+                    }                    
+                }
+                
+                
+                sb.append("File "+filename+ " đã được lưu \n");                
+            }             
+        }else{
+            
+            int numberRow=tbStudent.getRowCount();
+            int count;
+            String replaceString="";
+            for(int i=0;i<numberRow;i++){
+                count=0;
+                while(count<=2)
+                {
+                    replaceString=tbStudent.getValueAt(i,count).toString();
+                    bw.write(replaceString);
+                    bw.write("\n");
+                    count++;
+                }
+            }  
+            sb.append("File "+filename+ " đã được lưu \n"); 
+        }
+        bw.close(); 
+        file.close();
+        if(sb.length()>0){
+            JFrame frame = new JFrame("JOptionPane showMessageDialog example");
+            JOptionPane.showMessageDialog(frame,
+            sb.toString()
+            );
+       }    
     }
     /**
      * @param args the command line arguments
